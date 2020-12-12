@@ -1,0 +1,135 @@
+body {
+  background-color: #333;
+}
+
+.formcontainer {
+  background-color: #eee;
+  border-radius: 0px;
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid #ccc;
+  padding: 4px;
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+
+
+input {
+  height: 15px;
+}
+select {
+  height: 23px;
+}
+input[type=text] {
+
+}
+
+input[type=number] {
+  width: 55px;
+  text-align: center;
+}
+input[type=number]:read-only {
+  height: 17px;
+  text-align: center;
+
+}
+input[type=checkbox] {
+  vertical-align: middle;
+  margin: 0px;
+  padding: 0px;
+}
+input:read-only {
+  background-color: #ccc;
+  height: 20px;
+}
+
+
+
+.section_container {
+  height: 100%;
+  max-width: 96vw;
+  overflow-x: scroll;
+}
+
+
+#WeaponsTable table {
+  border-collapse: collapse;
+}
+
+#WeaponsTable th {
+  font-variant: small-caps;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+#WeaponsTable th, #WeaponsTable td {
+  border: 1px solid #ccc;
+  margin: 0px;
+}
+
+#WeaponsTable th:empty {
+  border: 0px;
+}
+
+#WeaponsTable td {
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+#WeaponsTable button {
+  width: 125px;
+}
+
+.hidden {
+  display: none;
+}
+
+section {
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid #ccc;
+}
+.reveal {
+  display: block;
+}
+
+th {
+  font-variant: small-caps;
+}
+
+.tn_modifier_table tr:nth-child(n+1):nth-child(-n+2) th {
+  border-bottom: 1px solid #999;
+}
+
+.tn_modifier {
+  width: 55px;
+  text-align: center;
+}
+
+#rangedattack_conditionstable table {
+  border-collapse: collapse;
+}
+
+#rangedattack_conditionstable th {
+  font-variant: small-caps;
+  vertical-align: top;
+}
+
+#rangedattack_conditionstable th, #rangedattack_conditionstable td {
+  border: 1px solid #ccc;
+  margin: 0px;
+  white-space: nowrap;
+}
+
+#rangedattack_conditionstable th:empty {
+  border: 0px;
+}
+
+#rangedattack_conditionstable td {
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+#rangedattack_conditionstable button {
+  width: 125px;
+}

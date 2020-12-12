@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Ranged Attack Calculator</title>
+
+    <link rel='stylesheet' href='css/index.css'>
+
+    <script src='https://code.jquery.com/jquery-3.5.0.js'></script>
+    <script src='js/RangedAttack.js'></script>
+
+  </head>
+
+  <body>
+    <div class='formcontainer'>
+      <div class='section_container'>
+        <section>
+          <h3>Ranged Weapons</h3>
+          <table id='WeaponsTable'>
+            <thead>
+              <tr>
+                <th rowspan=2>btns</th>
+                <th rowspan=2>TN</th>
+                <th rowspan=2>skill</th>
+                <th rowspan=2>ranks</th>
+                <th rowspan=2>dice<br>pool</th>
+                <th rowspan=2>weapon / ammunition / Choke</th>
+                <th rowspan=2>power</th>
+                <th rowspan=2>damage</th>
+                <th colspan=6>Range</th>
+                <th rowspan=2>Recoil<br>Comp.</br>
+                <th colspan=6>Accessories</th>
+              </tr>
+              <tr>
+                <th>target</th>
+                <th>min</th>
+                <th>short</th>
+                <th>medium</th>
+                <th>long</th>
+                <th>extreme</th>
+                <th>Internal</th>
+                <th>Top</th>
+                <th>Bottom</th>
+                <th>Barrel</th>
+                <th>Stock</th>
+                <th>Other</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>
+                  <input type='checkbox' onchange='UpdateWeaponsTable();' /><button>Single Shot</button>
+                  <br><input type='checkbox' onchange='UpdateWeaponsTable();' /><button>Semi-Auto 1st</button><button>Semi-Auto 2nd</button>
+                  <br><input type='checkbox' onchange='UpdateWeaponsTable();' /><button>Burst 1st</button><button>Burst 2nd</button>
+                  <br><input type='checkbox' onchange='UpdateWeaponsTable();' /><button>Full Auto</button><input name='FAshotsfired' type='number' min=3 max=18 onchange='UpdateWeaponsTable();'/> Rounds
+                </td><!--buttons-->
+                <td><!-- TNs -->
+                  <input name='weaponTN_SS' type='number' readonly onchange='UpdateWeaponsTable();' />
+                  <br><input name='weaponTN_SA1' type='number' readonly onchange='UpdateWeaponsTable();' /><input name='weaponTN_SA2' type='number' readonly onchange='UpdateWeaponsTable();' />
+                  <br><input name='weaponTN_B1' type='number' readonly onchange='UpdateWeaponsTable();' /><input name='weaponTN_B2' type='number' readonly onchange='UpdateWeaponsTable();' />
+                  <br><input name='weaponTN_FA' type='number' readonly onchange='UpdateWeaponsTable();' onchange='UpdateWeaponsTable();' />
+                </td>
+                </td>
+                <td>
+                  <input name='weaponskill' type='text' value='' onchange='UpdateWeaponsTable();' />
+                </td>
+                <td>
+                  <input name='weaponskillranks' type='number' min=1 value=1 onchange='UpdateWeaponsTable();' />
+                </td><!--ranks-->
+                <td><input name='weapondicepool' type='number' min=0 value=0 onchange='UpdateWeaponsTable();' /></td><!--pool-->
+                <td>
+                  <select name='weaponname' onchange='UpdateWeaponsTable();' />
+                    <option>Select a Weapon</option>
+                    <option>Einfield AS-7</option>
+                    <option>Heavy Pistol</option>
+                    <option>Ridiculously Long Weapon Name</option>
+                  </select>
+                  <br><select name='weaponammunitiontype' style='width: 100%;' onchange='UpdateWeaponsTable();' >
+                    <option>Standard Ammo</option>
+                    <option>Armor Piercing Ammo</option>
+                  </select>
+                  <br><input name='weaponammunition_tracers' type='checkbox' onchange='UpdateWeaponsTable();' />Tracer Rounds
+                  <br>Choke: <input name='weaponchoke' type='number' min=3 value=3 onchange='UpdateWeaponsTable();' />
+                </td><!--name-->
+                <td>
+                  <input name='weaponpower' type='number' min=0 value=0 onchange='UpdateWeaponsTable();' />
+                  <br><input name='weaponpower_normal' type='number' readonly onchange='UpdateWeaponsTable();' />
+                  <br><input name='weaponpower_burst' type='number' readonly onchange='UpdateWeaponsTable();' />
+                  <br><input name='weaponpower_fullauto' type='number' readonly onchange='UpdateWeaponsTable();' />
+                </td><!--power-->
+                <td>
+                  <select name='weapondamage' onchange='UpdateWeaponsTable();'>
+                    <option value=1>L (1)</option>
+                    <option value=2>M (3)</option>
+                    <option value=3>S (6)</option>
+                    <option value=4>D (10)</option>
+                  </select>
+                  <br><input name='weapondamage_normal' type='text' readonly style='width: 57px;' onchange='UpdateWeaponsTable();' />
+                  <br><input name='weapondamage_burst' type='text' readonly style='width: 57px;' onchange='UpdateWeaponsTable();' />
+                  <br><input name='weapondamage_fullauto' type='text' readonly style='width: 57px;' onchange='UpdateWeaponsTable();' />
+                </td><!--damage-->
+                <td><!--target range-->
+                  <input name='weapontargetrange' type='text' value='' onchange='UpdateWeaponsTable();' readonly onchange='UpdateWeaponsTable();' />
+                </td>
+                <td><input name='weaponminimumrange' type='number' min=0 value=0 onchange='UpdateWeaponsTable();' /></td><!--min-->
+                <td><input name='weaponshortrange' type='number' min=0 value=0 onchange='UpdateWeaponsTable();' /></td><!--short-->
+                <td><input name='weaponmediumrange' type='number' min=0 value=0 onchange='UpdateWeaponsTable();' /></td><!--medium-->
+                <td><input name='weaponlongrange' type='number' min=0 value=0 onchange='UpdateWeaponsTable();' /></td><!--long-->
+                <td><input name='weaponextremerange' type='number' min=0 value=0 onchange='UpdateWeaponsTable();' /></td><!--extreme-->
+                <td><input name='weaponrecoilcompensation' type='number' min=0 value=0 onchange='UpdateWeaponsTable();' /></td><!--Recoil Compensation-->
+                <td>
+                  <select name='weaponaccessoriesinternal' onchange='UpdateWeaponsTable();' onchange='UpdateWeaponsTable();' >
+                    <option>None</option>
+                    <option>Smart Link (+Goggles)</option>
+                    <option>Smart Link (+Cyberware)</option>
+                  </select>
+                </td>
+                <td>
+                  <select name='weaponaccessoriestop' onchange='UpdateWeaponsTable();' >
+                    <option>None</option>
+                    <option>Laser</option>
+                    <option>Image Scope (Low-Light)</option>
+                    <option>Magnification 1</option>
+                    <option>Magnification 2</option>
+                    <option>Magnification 3</option>
+                    <option>Smart Link (+Goggles)</option>
+                    <option>Smart Link (+Cyberware)</option>
+                    <option>Thermographic</option>
+                    <option>Ultrasound Sight (+Goggles)</option>
+                  </select>
+                </td>
+                <td>
+                  <select name='weaponaccessoriesbottom' onchange='UpdateWeaponsTable();' >
+                    <option>None</option>
+                    <option>Laser</option>
+                    <option>Bipod</option>
+                    <option>Tripod</option>
+                    <option>Gyro Mount</option>
+                    <option>Gyro Mount, Deluxe</option>
+                    <option>Ultrasound Sight (+Goggles)</option>
+                    <option>Drum Magazine</option>
+                  </select>
+                </td>
+                <td>
+                  <select name='weaponaccessoriesbarrel' onchange='UpdateWeaponsTable();' >
+                    <option>None</option>
+                    <option>Silencer</option>
+                    <option>Suppresser</option>
+                    <option>Gas Vent II</option>
+                    <option>Gas Vent III</option>
+                  </select>
+                </td>
+                <td>
+                  <select name='weaponaccessoriesstock' onchange='UpdateWeaponsTable();' >
+                    <option>None</option>
+                    <option>Shock Pads</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+      <div class='section_container'>
+        <section>
+          <h3>Ranged Attack Conditions</h3>
+          <table id='rangedattack_conditionstable'>
+            <thead>
+              <th>
+                Meters
+                <br>From Target
+              </th>
+              <th>
+                Aim
+                <br>Actions
+              </th>
+              <th>
+                Number
+                <br>of Targets
+              </th>
+              <th>
+                Attack
+                <br>Options
+              </th>
+              <th>
+                Target
+                <br>Movement
+              </th>
+              <th>
+                Attacker
+                <br>Movement
+              </th>
+              <th>
+                Additional
+                <br>Gyro
+                <br>Stabilization
+              </th>
+              <th>
+                Vision
+              </th>
+              <th>
+                Other
+                <br>Modifiers
+              </th>
+            </thead>
+
+            <tbody>
+              <tr>
+
+                <td><!-- meters from target -->
+                  <center>
+                  <input id='rangedattack_metersfromtarget' type='number' min=0 value=0 onchange='UpdateWeaponsTable();'/>
+                </td>
+
+                <td><!-- aim actions -->
+                  <center>
+                  <input id='rangedattack_aimactions' type='number' min=0 value=0 onchange='UpdateWeaponsTable();' />
+                </td>
+
+                <td><!-- number of targets-->
+                  <center>
+                  <input id='rangedattack_numberoftargets' type='number' min=1 value=1 onchange='UpdateWeaponsTable();' />
+                </td>
+
+                <td><!-- attack options -->
+                  <input id='rangedattack_blindfire' type='checkbox' value=8 onchange='UpdateWeaponsTable();' /><label>Blind Fire (+8)</label>
+                  <br><input id='rangedattack_partialcover' type='checkbox' value=4 onchange='UpdateWeaponsTable();' /><label>Partial Cover (+4)</label>
+                  <br><input id='rangedattack_usingsecondfirearm' type='checkbox' value=2 onchange='UpdateWeaponsTable();' /><label>Using Second Firearm (+2)</label>
+                  <br><input id='rangedattack_calledshot' type='checkbox' value=4 onchange='UpdateWeaponsTable();' /><label>Called Shot (+4)</label>
+                </td>
+                <td>
+                  <select id='rangedattack_targetmovement' style='width: 100%;' onchange='UpdateWeaponsTable();' >
+                    <option>Stationary</option>
+                    <option>Walking</option>
+                    <option>Running</option>
+                  </select>
+                  <br><input type='checkbox' style='visibility: hidden;' onchange='UpdateWeaponsTable();' ><label style='visibility: hidden;'>Difficult Ground</label>
+                </td>
+                <td>
+                  <select id='rangedattack_attackermovement' style='width: 100%;' onchange='UpdateWeaponsTable();' >
+                    <option>Stationary</option>
+                    <option>Walking</option>
+                    <option>Running</option>
+                  </select>
+                  <br><input id='rangedattack_attackerdifficultground' type='checkbox' onchange='UpdateWeaponsTable();' ><label>Difficult Ground</label>
+                </td>
+                <td>
+                  <center>
+                  <input id='rangedattack_gyrostabilization' type='number' min=0 value=0 onchange='UpdateWeaponsTable();' />
+                </td>
+                <td>
+                  <select id='rangedattack_visiontype' onchange='UpdateWeaponsTable();' >
+                    <option value=0>Normal</option>
+                    <option value=1>Augmented Low-Light</option>
+                    <option value=2>Natural Low-Light</option>
+                    <option value=3>Augmented Thermographic</option>
+                    <option value=4>Natural Thermographic</option>
+                  </select>
+                  <br><select id='rangedattack_visionconditions' style='width: 100%; 'onchange='UpdateWeaponsTable();' >
+                    <option value=0>Normal</option>
+                    <option value=1>Full Darkness</option>
+                    <option value=2>Minimal Light</option>
+                    <option value=3>Partial Light</option>
+                    <option value=4>Glare</option>
+                    <option value=5>Mist</option>
+                    <option value=6>Light Smoke/Fog/Rain</option>
+                    <option value=7>Heavy Smoke/Fog/Rain</option>
+                    <option value=8>Thermal Smoke</option>
+                  </select>
+                  <br><input id='rangedattack_flashlight' type='checkbox' onchange='UpdateWeaponsTable();' /><label for='rangedattack_flashlight'>Flashlight</label>
+                </td>
+                <td>
+                  <center>
+                  <input id='rangedattack_othermodifiers' type='number' value=0 onchange='UpdateWeaponsTable();' />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div><!-- section container -->
+
+    </div>
+  </body>
+
+  <foot>
+  </foot>
+</html>
